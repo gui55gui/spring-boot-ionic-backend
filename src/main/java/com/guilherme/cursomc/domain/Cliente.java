@@ -2,8 +2,11 @@ package com.guilherme.cursomc.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.guilherme.cursomc.domain.enums.TipoCliente;
+import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
 import java.util.*;
 
@@ -15,8 +18,15 @@ public class Cliente implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
+    @NotEmpty(message = "Preenchimento obrigatório")
+    @Length(min=5, max=120, message = "O tamanho deve ser entre 5 e 120 caracteres")
     private String name;
+
+    @NotEmpty(message = "Preenchimento obrigatório")
+    @Email(message = "Email invalido")
     private String email;
+
     private String cpfOuCnpj;
     private Integer tipo;
 
@@ -41,7 +51,7 @@ public class Cliente implements Serializable {
         this.name = name;
         this.email = email;
         this.cpfOuCnpj = cpfOuCnpj;
-        this.tipo = tipo.getCod();
+        this.tipo = (tipo==null) ? null : tipo.getCod();
     }
 
     public Integer getId() {

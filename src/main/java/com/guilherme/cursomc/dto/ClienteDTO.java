@@ -1,28 +1,25 @@
 package com.guilherme.cursomc.dto;
 
-import com.guilherme.cursomc.domain.Categoria;
-import org.hibernate.validator.constraints.Length;
+import com.guilherme.cursomc.domain.Cliente;
 
-import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
 
-public class CategoriaDTO implements Serializable {
+public class ClienteDTO implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     private Integer id;
-
-    @NotEmpty(message = "Preenchimento obrigatório")
-    @Length(min=5, max=80, message = "O tamanho deve ser entre 5 e 80 caracteres")
     private String name;
+    private String email;
 
-    public CategoriaDTO() {
+    public ClienteDTO() {
 
     }
 
-    public CategoriaDTO(Categoria obj) {
+    public ClienteDTO(Cliente obj) {
         id = obj.getId();
         name = obj.getName();
+        email = obj.getEmail();
     }
 
     public Integer getId() {
@@ -39,5 +36,13 @@ public class CategoriaDTO implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }
